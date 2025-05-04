@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public interface TodoRepository extends JpaRepository<Todo, Long> {
+public interface TodoRepository extends JpaRepository<Todo, Long>, TodoRepositoryQuery {
 
     @EntityGraph(attributePaths = {"user"})
     @Query("SELECT t FROM Todo t " +
@@ -28,12 +28,4 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     @EntityGraph(attributePaths = {"user"})
     Page<Todo> findByModifiedAtBetweenOrderByModifiedAtDesc(LocalDateTime modifiedAtAfter, LocalDateTime modifiedAtBefore, Pageable pageable);
 
-
-
-
-
-    @Query("SELECT t FROM Todo t " +
-            "LEFT JOIN t.user " +
-            "WHERE t.id = :todoId")
-    Optional<Todo> findByIdWithUser(@Param("todoId") Long todoId);
 }
