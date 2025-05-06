@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoSaveRequest {
-
     @NotBlank
     private String title;
+
     @NotBlank
     private String contents;
 }
