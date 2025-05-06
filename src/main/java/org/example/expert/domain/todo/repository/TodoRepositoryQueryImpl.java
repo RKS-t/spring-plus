@@ -2,6 +2,7 @@ package org.example.expert.domain.todo.repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.comment.entity.QComment;
@@ -57,15 +58,17 @@ public class TodoRepositoryQueryImpl implements TodoRepositoryQuery{
                 .select(Projections.constructor(TodoListResponseDto.class,
                         todo.id,
                         todo.title,
-                        comment.count(),
-                        manager.count(),
+                        JPAExpressions.select(comment.count())
+                                .from(comment)
+                                .where(comment.todo.eq(todo)),
+                        JPAExpressions.select(manager.count())
+                                .from(manager)
+                                .where(manager.todo.eq(todo)),
                         todo.user.nickname,
                         todo.createdAt,
                         todo.modifiedAt
                 ))
                 .from(todo)
-                .leftJoin(todo.comments, comment)
-                .leftJoin(todo.managers, manager)
                 .leftJoin(todo.user, user)
                 .where(builder)
                 .groupBy(todo.id, todo.user.nickname, todo.title, todo.createdAt, todo.modifiedAt)
