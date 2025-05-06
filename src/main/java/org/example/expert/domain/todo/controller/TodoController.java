@@ -6,6 +6,7 @@ import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.todo.dto.SearchParm;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
+import org.example.expert.domain.todo.dto.response.TodoListResponseDto;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
 import org.example.expert.domain.todo.service.TodoService;
@@ -44,5 +45,15 @@ public class TodoController {
     @GetMapping("/todos/{todoId}")
     public ResponseEntity<TodoResponse> getTodo(@PathVariable long todoId) {
         return ResponseEntity.ok(todoService.getTodo(todoId));
+    }
+
+    @GetMapping("/todos/find")
+    public ResponseEntity<Page<TodoListResponseDto>> getTodosByKeyword(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String titleKeyword,
+            @RequestParam String nicknameKeyword
+    ) {
+        return ResponseEntity.ok(todoService.getTodosByKeyword(page, size, titleKeyword, nicknameKeyword));
     }
 }
