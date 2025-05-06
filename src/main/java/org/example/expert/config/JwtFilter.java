@@ -66,11 +66,13 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
 
+
+
             String username = claims.getSubject();
             UserDetails userDetails = new CustomUserDetails(
                     Long.valueOf(username),
                     claims.get("email", String.class),
-                    UserRole.of((String) request.getAttribute("userRole")),
+                    UserRole.of(claims.get("userRole", String.class)),
                     claims.get("nickname", String.class));
             Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
