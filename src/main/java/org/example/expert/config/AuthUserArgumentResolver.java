@@ -1,14 +1,11 @@
 package org.example.expert.config;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.example.expert.domain.auth.exception.AuthException;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.user.enums.UserRole;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
