@@ -10,6 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -21,6 +25,15 @@ public class UserService {
     public UserResponse getUser(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
         return new UserResponse(user.getId(), user.getEmail());
+    }
+
+    public List<UserResponse> getUserList(String nickname) {
+        Instant start = Instant.now();
+        List<UserResponse> userList = userRepository.findByNickname(nickname).stream().map(UserResponse::toDto).toList();
+        Instant end = Instant.now();
+        System.out.println("전체 소요 시간: " + Duration.between(start, end).toMillis() + "밀리초");
+
+        return userList;
     }
 
     @Transactional
