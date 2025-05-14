@@ -1,5 +1,6 @@
 package org.example.expert.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.example.expert.domain.auth.exception.AuthException;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
@@ -34,6 +35,7 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
             NativeWebRequest webRequest,
             @Nullable WebDataBinderFactory binderFactory
     ) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -46,7 +48,7 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
                 customUserDetails.getUserId(),
                 customUserDetails.getEmail(),
                 customUserDetails.getUserRole(),
-                customUserDetails.getEmail()
+                customUserDetails.getNickname()
         );
     }
 }

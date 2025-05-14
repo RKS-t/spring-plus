@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: expert-app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_NAME: expert
+      DB_USERNAME: expert_user
+      DB_PASSWORD: springplus
+    networks:
+      - expert-network
+    platform: linux/amd64
+
+volumes:
+  mysql-data:
+
+networks:
+  expert-network:
