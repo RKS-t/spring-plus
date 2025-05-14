@@ -10,7 +10,7 @@
 ![image](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcqeEJ1%2FbtsNYUXHjNh%2FKQzHhBJlwyoDYfYwK8NuJK%2Fimg.png)
 
 
-*health api 결과
+* health api 결과
 ![image](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2Kg7E%2FbtsNWsvboYo%2F3zcXJkgeuKusSIoqM6Dhb0%2Fimg.png)
 
 ---------
